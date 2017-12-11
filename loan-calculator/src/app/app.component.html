@@ -3,7 +3,15 @@
 
 <form class="example-form">
   <mat-form-field class="example-full-width">
-    <input matInput placeholder="Favorite food" value="Sushi">
+    <input matInput placeholder="Favorite food" value="Test">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-select placeholder="Loan period">
+      <mat-option *ngFor="let period of periods" [value]="period.value">
+        {{ period.viewValue }}
+      </mat-option>
+    </mat-select>
   </mat-form-field>
 </form>
 

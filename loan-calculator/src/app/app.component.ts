@@ -8,6 +8,12 @@ import { Component, OnInit } from '@angular/core';
 export class AppComponent implements OnInit {
   title = 'app';
 
+  periods = [
+    {value: 1, viewValue: 12},
+    {value: 2, viewValue: 24},
+    {value: 3, viewValue: 36}
+  ];
+
   interestRate: number;
   loanPeriod: number;
   model: any = {};

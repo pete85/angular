@@ -3,7 +3,10 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 
-import {MatInputModule} from '@angular/material/input';
+import {
+  MatInputModule,
+  MatSelectModule,
+} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -11,10 +14,12 @@ import {MatInputModule} from '@angular/material/input';
   ],
   imports: [
     BrowserModule,
-    MatInputModule
+    MatInputModule,
+    MatSelectModule
   ],
   exports: [
-    MatInputModule
+    MatInputModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]
