@@ -2,11 +2,19 @@
 
 @import "theme.css";
 
+* {
+  font-family: 'Poiret One', cursive;
+}
+
 main {
   width: 60%;
   margin: 0 auto;
   padding: 20px;
-  background: #E3E2E1;
+  background: #F0F4F5;
+}
+
+.txtValue {
+  color: #A92222;
 }
 
 section {

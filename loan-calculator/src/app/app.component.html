@@ -7,12 +7,27 @@
       <mat-form-field class="example-full-width">
         <input
           matInput
-          type="text"
+          type="number"
+          min="0"
+          max="100000"
+          step="0.01"
+          placeholder="Amount borrowed"
+          #amount="ngModel"
+          name="amount"
+          [(ngModel)]="model.amountBorrowed">
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <input
+          matInput
+          type="number"
+          min="0"
+          max="100"
+          step="0.01"
           placeholder="Interest rate"
           #interest="ngModel"
           name="interest"
-          [(ngModel)]="model.interestRate"
-          value="Test">
+          [(ngModel)]="model.interestRate">
       </mat-form-field>
 
       <mat-form-field>
@@ -29,6 +44,10 @@
       </mat-form-field>
 
     </form>
+  </section>
+
+  <section>
+    <h3>Loan of <span class="txtValue">{{model.amountBorrowed | currency:'GBP':true}}</span> over the period of <span class="txtValue">{{model.loanPeriod}}</span> months, with interest rate of <span class="txtValue">{{model.interestRate}}%</span></h3>
   </section>
 </main>
 
