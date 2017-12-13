@@ -10,8 +10,8 @@ export class AppComponent implements OnInit, DoCheck {
   model: any = {};
   noOfPayments: number; // Number of periodic payments
   interestRate: number; // Periodic Interest Rate
-  discountFactor: number; // Discount factor
   monthlyCost: number; // Monthly payment amount
+  monthlyBalance = [];
 
   // periods = [12, 24, 36, 48, 60, 72, 84];
 
@@ -33,18 +33,22 @@ export class AppComponent implements OnInit, DoCheck {
   ngDoCheck() {
     this.noOfPayments = this.model.loanPeriod * 12;
     this.interestRate = (this.model.interestRate / 100) / 12;
-    console.log(this.model);
     this.calculateMonthlyCost();
   }
 
   calculateMonthlyCost() {
-
     const a = this.interestRate * Math.pow(1 + this.interestRate, this.noOfPayments);
     const b = Math.pow(1 + this.interestRate, this.noOfPayments) - 1;
 
     this.monthlyCost = this.model.amountBorrowed * a / b;
 
     return this.monthlyCost;
+  }
 
+  getBalance() {
+    for (let i = 0; i < this.noOfPayments; i++) {
+      this.monthlyBalance.push({month: i + 1});
+    }
+    console.log(this.monthlyBalance);
   }
 }

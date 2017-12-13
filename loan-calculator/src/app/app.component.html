@@ -52,6 +52,7 @@
     <!--<h3>Discount Factor: <span class="txtValue">{{discountFactor || ''}}</span></h3>-->
 
     <h3>Your monthly payment will be <span class="txtValue">{{monthlyCost | currency:'GBP':'symbol'}}</span></h3>
+    <button mat-raised-button color="primary" (click)="getBalance()">View balance</button>
   </section>
 
   <section id="sources">
