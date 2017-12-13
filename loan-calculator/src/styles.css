@@ -17,8 +17,17 @@ main {
   color: #A92222;
 }
 
-section {
+.centered {
   text-align: center;
+}
+
+#sources {
+  position: absolute;
+  bottom: 30px;
+}
+
+a {
+  text-decoration: none;
 }
 
 

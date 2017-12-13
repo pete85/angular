@@ -2,14 +2,14 @@
 
 
 <main>
-  <section>
+  <section class="centered">
     <form class="example-form">
       <mat-form-field class="example-full-width">
         <input
           matInput
           type="number"
           min="0"
-          max="100000"
+          max="1000000"
           step="0.01"
           placeholder="Amount borrowed"
           #amount="ngModel"
@@ -37,8 +37,8 @@
           [(ngModel)]="model.loanPeriod"
           placeholder="Loan period"
         required>
-          <mat-option *ngFor="let period of periods" [value]="period">
-            {{ period }}
+          <mat-option *ngFor="let period of periods" [value]="period.value">
+            {{ period.view }}
           </mat-option>
         </mat-select>
       </mat-form-field>
@@ -46,8 +46,34 @@
     </form>
   </section>
 
-  <section>
-    <h3>Loan of <span class="txtValue">{{model.amountBorrowed | currency:'GBP':true}}</span> over the period of <span class="txtValue">{{model.loanPeriod}}</span> months, with interest rate of <span class="txtValue">{{model.interestRate}}%</span></h3>
+  <section class="centered">
+    <h3>Loan of <span class="txtValue">{{model.amountBorrowed | currency:'GBP':'symbol'}}</span> over the period of <span class="txtValue">{{noOfPayments || ''}}</span> months, with interest rate of <span class="txtValue">{{model.interestRate}}%</span></h3>
+
+    <!--<h3>Discount Factor: <span class="txtValue">{{discountFactor || ''}}</span></h3>-->
+
+    <h3>Your monthly payment will be <span class="txtValue">{{monthlyCost | currency:'GBP':'symbol'}}</span></h3>
+  </section>
+
+  <section id="sources">
+    <p>Sources:</p>
+    <p class="txtSmall">
+      <a target="_blank" href="https://www.slideshare.net/mbaker1960/how-to-calculate-a-mortgage-payment">
+        slideshare.net
+      </a>
+      &nbsp; - How To Calculate A Mortgage Payment
+    </p>
+    <p class="txtSmall">
+      <a target="_blank" href="https://www.thebalance.com/loan-payment-calculations-315564">
+        thebalance.com
+      </a>
+      &nbsp; - tCalculate Loan Payments & Costs: Formulas and Tools
+    </p>
+    <p class="txtSmall">
+      <a target="_blank" href="http://www.calculator.net/payment-calculator.html">
+        calculator.net
+      </a>
+      &nbsp; - Payment Calculator
+    </p>
   </section>
 </main>
 
