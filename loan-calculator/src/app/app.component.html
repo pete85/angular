@@ -1,17 +1,34 @@
 <!--The content below is only a placeholder and can be replaced.-->
 
 
-<form class="example-form">
-  <mat-form-field class="example-full-width">
-    <input matInput placeholder="Favorite food" value="Test">
-  </mat-form-field>
+<main>
+  <section>
+    <form class="example-form">
+      <mat-form-field class="example-full-width">
+        <input
+          matInput
+          type="text"
+          placeholder="Interest rate"
+          #interest="ngModel"
+          name="interest"
+          [(ngModel)]="model.interestRate"
+          value="Test">
+      </mat-form-field>
 
-  <mat-form-field>
-    <mat-select placeholder="Loan period">
-      <mat-option *ngFor="let period of periods" [value]="period.value">
-        {{ period.viewValue }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-</form>
+      <mat-form-field>
+        <mat-select
+          name="period"
+          #period="ngModel"
+          [(ngModel)]="model.loanPeriod"
+          placeholder="Loan period"
+        required>
+          <mat-option *ngFor="let period of periods" [value]="period">
+            {{ period }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+    </form>
+  </section>
+</main>
 

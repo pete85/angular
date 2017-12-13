@@ -1,3 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import "theme.css";
+
+main {
+  width: 60%;
+  margin: 0 auto;
+  padding: 20px;
+  background: #E3E2E1;
+}
+
+section {
+  text-align: center;
+}
+
+
