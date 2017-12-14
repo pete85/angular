@@ -62,38 +62,82 @@
     <button mat-raised-button color="primary" (click)="getBalance()">View balance</button>
   </section>
 
-  <section *ngIf="listOpened">
-    <mat-list *ngFor="let item of balanceListMonthly">
-      <mat-list-item>
-        <p>{{item.month}}</p>
-        <p>{{item.interest | currency:'GBP':'symbol'}}</p>
-        <p>{{item.paid | currency:'GBP':'symbol'}}</p>
-        <p>{{item.balance | currency:'GBP':'symbol'}}</p>
-      </mat-list-item>
-    </mat-list>
+  <section class="example-container mat-elevation-z8" *ngIf="listOpened">
+    <!--<mat-list *ngFor="let item of balanceListMonthly">-->
+      <!--<mat-list-item>-->
+        <!--<p>{{item.month}}</p>-->
+        <!--<p>{{item.interest | currency:'GBP':'symbol'}}</p>-->
+        <!--<p>{{item.paid | currency:'GBP':'symbol'}}</p>-->
+        <!--<p>{{item.balance | currency:'GBP':'symbol'}}</p>-->
+      <!--</mat-list-item>-->
+    <!--</mat-list>-->
+
+    <!--<div class="example-header">-->
+      <!--<mat-form-field>-->
+        <!--<input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">-->
+      <!--</mat-form-field>-->
+    <!--</div>-->
+
+    <mat-table #table [dataSource]="dataSource">
+
+      <!-- Month Column -->
+      <ng-container matColumnDef="month">
+        <mat-header-cell *matHeaderCellDef> Month </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.month}} </mat-cell>
+      </ng-container>
+
+      <!-- Interest Column -->
+      <ng-container matColumnDef="interest">
+        <mat-header-cell *matHeaderCellDef> Interest </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.interest | currency:'GBP':'symbol'}} </mat-cell>
+      </ng-container>
+
+      <!-- Paid Column -->
+      <ng-container matColumnDef="paid">
+        <mat-header-cell *matHeaderCellDef> Paid </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.paid | currency:'GBP':'symbol'}} </mat-cell>
+      </ng-container>
+
+      <!-- Balance Column -->
+      <ng-container matColumnDef="balance">
+        <mat-header-cell *matHeaderCellDef> Balance </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.balance | currency:'GBP':'symbol'}} </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+
+    <mat-paginator #paginator
+                  [length]="balanceListMonthly.length"
+                  [pageIndex]="0"
+                  [pageSize]="25"
+                  [pageSizeOptions]="[5, 10, 25, 100]">
+    </mat-paginator>
+
   </section>
 
-  <section id="sources">
-    <p>Sources:</p>
-    <p class="txtSmall">
-      <a target="_blank" href="https://www.slideshare.net/mbaker1960/how-to-calculate-a-mortgage-payment">
-        slideshare.net
-      </a>
-      &nbsp; - How To Calculate A Mortgage Payment
-    </p>
-    <p class="txtSmall">
-      <a target="_blank" href="https://www.thebalance.com/loan-payment-calculations-315564">
-        thebalance.com
-      </a>
-      &nbsp; - Calculate Loan Payments & Costs: Formulas and Tools
-    </p>
-    <p class="txtSmall">
-      <a target="_blank" href="http://www.calculator.net/payment-calculator.html">
-        calculator.net
-      </a>
-      &nbsp; - Payment Calculator
-    </p>
-  </section>
+  <!--<section id="sources">-->
+    <!--<p>Sources:</p>-->
+    <!--<p class="txtSmall">-->
+      <!--<a target="_blank" href="https://www.slideshare.net/mbaker1960/how-to-calculate-a-mortgage-payment">-->
+        <!--slideshare.net-->
+      <!--</a>-->
+      <!--&nbsp; - How To Calculate A Mortgage Payment-->
+    <!--</p>-->
+    <!--<p class="txtSmall">-->
+      <!--<a target="_blank" href="https://www.thebalance.com/loan-payment-calculations-315564">-->
+        <!--thebalance.com-->
+      <!--</a>-->
+      <!--&nbsp; - Calculate Loan Payments & Costs: Formulas and Tools-->
+    <!--</p>-->
+    <!--<p class="txtSmall">-->
+      <!--<a target="_blank" href="http://www.calculator.net/payment-calculator.html">-->
+        <!--calculator.net-->
+      <!--</a>-->
+      <!--&nbsp; - Payment Calculator-->
+    <!--</p>-->
+  <!--</section>-->
 
 </main>
 

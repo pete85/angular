@@ -6,6 +6,7 @@ import {MatButtonModule} from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
 import {MatListModule} from '@angular/material/list';
 import {MatTableModule} from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material';
 
 import {
   MatInputModule,
@@ -14,7 +15,7 @@ import {
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -24,7 +25,8 @@ import {
     BrowserAnimationsModule,
     FormsModule,
     MatListModule,
-    MatTableModule
+    MatTableModule,
+    MatPaginatorModule
   ],
   exports: [
     MatInputModule,
@@ -33,7 +35,8 @@ import {
     BrowserAnimationsModule,
     FormsModule,
     MatListModule,
-    MatTableModule
+    MatTableModule,
+    MatPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,12 +1,12 @@
-import {Component, OnInit, DoCheck} from '@angular/core';
-import {MatTableDataSource} from '@angular/material';
+import {Component, OnInit, DoCheck, ViewChild, AfterViewInit} from '@angular/core';
+import {MatPaginator, MatTableDataSource} from '@angular/material';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit, DoCheck {
+export class AppComponent implements OnInit, DoCheck, AfterViewInit {
 
   model: any = {};
   noOfPayments: number; // Number of periodic payments
@@ -18,8 +18,10 @@ export class AppComponent implements OnInit, DoCheck {
   paid: number;
   interestMonthly: number;
   listOpened: boolean;
-  // displayedColumns = ['month', 'interest', 'paid', 'balance'];
-  // dataSource = new MatTableDataSource(ELEMENT_DATA);
+  displayedColumns = ['month', 'interest', 'paid', 'balance'];
+  dataSource: any;
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
 
   // periods = [12, 24, 36, 48, 60, 72, 84];
@@ -41,14 +43,22 @@ export class AppComponent implements OnInit, DoCheck {
     this.listOpened = false;
   }
 
+  ngAfterViewInit() {
+    // this.dataSource.paginator = this.paginator;
+  }
+
   ngDoCheck() {
     this.noOfPayments = this.model.loanPeriod * 12;
     this.interestRate = (this.model.interestRate / 100) / 12;
     this.calculateMonthlyCost();
     this.total = this.monthlyCost * this.noOfPayments;
-
-
   }
+
+  // applyFilter(filterValue: string) {
+  //   filterValue = filterValue.trim(); // Remove whitespace
+  //   filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+  //   this.dataSource.filter = filterValue;
+  // }
 
   calculateMonthlyCost() {
     const a = this.interestRate * Math.pow(1 + this.interestRate, this.noOfPayments);
@@ -61,6 +71,8 @@ export class AppComponent implements OnInit, DoCheck {
 
   getBalance() {
     this.listOpened = true;
+    this.dataSource = new MatTableDataSource(this.balanceListMonthly);
+    this.dataSource.paginator = this.paginator;
     this.balance = this.model.amountBorrowed;
     console.log('Initial balance: ' + this.balance);
 
@@ -76,9 +88,9 @@ export class AppComponent implements OnInit, DoCheck {
   }
 }
 
-// export interface Element {
-//   month: number;
-//   interest: number;
-//   paid: number;
-//   balance: number;
-// }
+export interface Element {
+  month: number;
+  interest: number;
+  paid: number;
+  balance: number;
+}
