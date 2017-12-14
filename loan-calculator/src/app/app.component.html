@@ -3,6 +3,9 @@
 
 <main>
   <section class="centered">
+    <h1>Loan Calculator</h1>
+  </section>
+  <section class="centered">
     <form class="example-form">
       <mat-form-field class="example-full-width">
         <input
@@ -52,6 +55,10 @@
     <!--<h3>Discount Factor: <span class="txtValue">{{discountFactor || ''}}</span></h3>-->
 
     <h3>Your monthly payment will be <span class="txtValue">{{monthlyCost | currency:'GBP':'symbol'}}</span></h3>
+
+    <h3>Total amount to pay will be <span class="txtValue">{{total | currency:'GBP':'symbol'}}</span></h3>
+
+
     <button mat-raised-button color="primary" (click)="getBalance()">View balance</button>
   </section>
 
@@ -67,7 +74,7 @@
       <a target="_blank" href="https://www.thebalance.com/loan-payment-calculations-315564">
         thebalance.com
       </a>
-      &nbsp; - tCalculate Loan Payments & Costs: Formulas and Tools
+      &nbsp; - Calculate Loan Payments & Costs: Formulas and Tools
     </p>
     <p class="txtSmall">
       <a target="_blank" href="http://www.calculator.net/payment-calculator.html">
