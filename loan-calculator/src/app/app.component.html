@@ -62,6 +62,17 @@
     <button mat-raised-button color="primary" (click)="getBalance()">View balance</button>
   </section>
 
+  <section *ngIf="listOpened">
+    <mat-list *ngFor="let item of balanceListMonthly">
+      <mat-list-item>
+        <p>{{item.month}}</p>
+        <p>{{item.interest | currency:'GBP':'symbol'}}</p>
+        <p>{{item.paid | currency:'GBP':'symbol'}}</p>
+        <p>{{item.balance | currency:'GBP':'symbol'}}</p>
+      </mat-list-item>
+    </mat-list>
+  </section>
+
   <section id="sources">
     <p>Sources:</p>
     <p class="txtSmall">
@@ -83,5 +94,6 @@
       &nbsp; - Payment Calculator
     </p>
   </section>
+
 </main>
 

@@ -1,4 +1,5 @@
 import {Component, OnInit, DoCheck} from '@angular/core';
+import {MatTableDataSource} from '@angular/material';
 
 @Component({
   selector: 'app-root',
@@ -11,8 +12,15 @@ export class AppComponent implements OnInit, DoCheck {
   noOfPayments: number; // Number of periodic payments
   interestRate: number; // Periodic Interest Rate
   monthlyCost: number; // Monthly payment amount
-  monthlyBalance = [];
+  balanceListMonthly = [];
   total: number;
+  balance: number;
+  paid: number;
+  interestMonthly: number;
+  listOpened: boolean;
+  // displayedColumns = ['month', 'interest', 'paid', 'balance'];
+  // dataSource = new MatTableDataSource(ELEMENT_DATA);
+
 
   // periods = [12, 24, 36, 48, 60, 72, 84];
 
@@ -30,6 +38,7 @@ export class AppComponent implements OnInit, DoCheck {
 
   ngOnInit() {
     this.total = 0;
+    this.listOpened = false;
   }
 
   ngDoCheck() {
@@ -51,10 +60,25 @@ export class AppComponent implements OnInit, DoCheck {
   }
 
   getBalance() {
+    this.listOpened = true;
+    this.balance = this.model.amountBorrowed;
+    console.log('Initial balance: ' + this.balance);
+
     for (let i = 0; i < this.noOfPayments; i++) {
-      this.monthlyBalance.push({month: i + 1});
+      this.interestMonthly = this.balance * this.interestRate;
+      this.paid = this.monthlyCost - this.interestMonthly;
+      this.balance = this.balance - this.paid;
+      this.balanceListMonthly.push({month: i + 1, interest: this.interestMonthly, paid: this.paid, balance: this.balance});
     }
-    console.log(this.monthlyBalance);
-    console.log('Total to pay: ' + this.total);
+    console.log(this.balanceListMonthly);
+
+    return this.balanceListMonthly;
   }
 }
+
+// export interface Element {
+//   month: number;
+//   interest: number;
+//   paid: number;
+//   balance: number;
+// }
