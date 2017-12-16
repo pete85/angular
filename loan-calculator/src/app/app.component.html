@@ -62,7 +62,7 @@
     <button mat-raised-button color="primary" (click)="getBalance()">View balance</button>
   </section>
 
-  <section class="example-container mat-elevation-z8" *ngIf="listOpened">
+  <section id="tblContainer" class="example-container mat-elevation-z8" *ngIf="listOpened">
     <!--<mat-list *ngFor="let item of balanceListMonthly">-->
       <!--<mat-list-item>-->
         <!--<p>{{item.month}}</p>-->
@@ -108,12 +108,12 @@
       <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
     </mat-table>
 
-    <mat-paginator #paginator
-                  [length]="balanceListMonthly.length"
-                  [pageIndex]="0"
-                  [pageSize]="25"
-                  [pageSizeOptions]="[5, 10, 25, 100]">
-    </mat-paginator>
+    <!--<mat-paginator #paginator-->
+                  <!--[length]="balanceListMonthly.length"-->
+                  <!--[pageIndex]="0"-->
+                  <!--[pageSize]="25"-->
+                  <!--[pageSizeOptions]="[5, 10, 25, 100]">-->
+    <!--</mat-paginator>-->
 
   </section>
 
