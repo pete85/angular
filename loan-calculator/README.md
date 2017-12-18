@@ -18,6 +18,8 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 Loan calculator app built with Angular 5. The app provides information about monthly payments, total amount to pay and monthly view of both interest and balance.
 
+[DEMO](http://pete85.com/projects/angular/loan-calculator/)
+
 ## Sources
 
 * [slideshare.net](https://www.slideshare.net/mbaker1960/how-to-calculate-a-mortgage-payment)
