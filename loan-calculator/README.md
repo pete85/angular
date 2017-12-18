@@ -12,16 +12,18 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build. Use the `--base-href YOUR PATH` if your destination directory is not root.
 
-## Running unit tests
+## Description
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Loan calculator app built with Angular 5. The app provides information about monthly payments, total amount to pay and monthly view of both interest and balance.
 
-## Running end-to-end tests
+[DEMO](http://pete85.com/projects/angular/loan-calculator/)
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+## Sources
 
-## Further help
+* [slideshare.net](https://www.slideshare.net/mbaker1960/how-to-calculate-a-mortgage-payment)
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+* [thebalance.com](https://www.thebalance.com/loan-payment-calculations-315564)
+
+* [calculator.net](http://www.calculator.net/payment-calculator.html)
