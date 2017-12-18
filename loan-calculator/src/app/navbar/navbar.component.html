@@ -2,11 +2,11 @@
   <i class="material-icons">more_vert</i>
 </button>
 <mat-menu #menu="matMenu">
-  <button mat-menu-item>
+  <button mat-menu-item (click)="openHome()">
     <i class="material-icons">home</i>
     <span>Home</span>
   </button>
-  <button mat-menu-item>
+  <button mat-menu-item (click)="openSources()">
     <i class="material-icons">info</i>
     <span>Sources</span>
   </button>

@@ -10,7 +10,10 @@ main {
   width: 70%;
   margin: 0 auto;
   padding: 20px;
-  background: #F0F4F5;
+  background: #EBF2F5;
+  -webkit-box-shadow: 5px 5px 20px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 5px 5px 20px 0px rgba(0,0,0,0.75);
+  box-shadow: 5px 5px 20px 0px rgba(0,0,0,0.75);
 }
 
 .txtValue {
@@ -19,11 +22,6 @@ main {
 
 .centered {
   text-align: center;
-}
-
-#sources {
-  position: absolute;
-  bottom: 30px;
 }
 
 a {
@@ -42,12 +40,64 @@ mat-form-field {
   min-width: 300px;
 }
 
+
+/*PAYMENTS TABLE*/
+
 .mat-table {
   overflow: auto;
   max-height: 500px;
 }
 
-#tblContainer {
-  margin-top: 30px;
+.mat-header-cell, .mat-paginator, .mat-paginator-page-size .mat-select-trigger {
+  color: #FFFFFF;
+  font-size: 16px;
+  font-weight: 700;
 }
 
+#tblContainer {
+  position: relative;
+  margin-top:100px;
+}
+#tblContainer .mat-table {
+  max-height: calc(100vh - 200px);
+  overflow-y: auto;
+}
+#tblContainer .mat-table .mat-header-row {
+  position: absolute;
+  top: -50px;
+  left: 0;
+  right: 0;
+  /*right: 18px;*/
+  background: #2B373B;
+}
+
+.mat-paginator-container {
+  background: #2B373B;
+}
+
+.mat-paginator-decrement, .mat-paginator-increment {
+  border-top: 2px solid #FFFFFF;
+  border-right: 2px solid #FFFFFF;
+}
+
+.mat-paginator-page-size-select .mat-select {
+  background: #FFFFFF;
+  padding: 5px;
+}
+
+/*SOURCES*/
+
+.left, .right {
+  display: inline-block;
+  width: 48%;
+}
+
+.left {
+  text-align: right;
+  margin-right: 1%;
+}
+
+.right {
+  font-style: italic;
+  margin-left: 1%;
+}

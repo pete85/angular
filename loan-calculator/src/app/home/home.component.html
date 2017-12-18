@@ -59,7 +59,7 @@
     <h3>Total amount to pay will be <span class="txtValue">{{total | currency:'GBP':'symbol'}}</span></h3>
 
 
-    <button mat-raised-button color="primary" (click)="getBalance()">View balance</button>
+    <button mat-raised-button color="primary" (click)="getBalance()" [disabled]="listOpened">View balance</button>
   </section>
 
   <section *ngIf="listOpened" id="tblContainer" class="example-container mat-elevation-z8">

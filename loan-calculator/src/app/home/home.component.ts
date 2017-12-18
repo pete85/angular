@@ -74,7 +74,6 @@ export class HomeComponent implements OnInit, DoCheck {
     }
     console.log(this.balanceListMonthly);
     this.listOpened = true;
-
     return this.balanceListMonthly;
   }
 }
