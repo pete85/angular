@@ -62,5 +62,9 @@
     <button mat-raised-button color="primary" (click)="getBalance()">View balance</button>
   </section>
 
+  <section *ngIf="listOpened" id="tblContainer" class="example-container mat-elevation-z8">
+    <app-payments [balanceListMonthly]="balanceListMonthly"></app-payments>
+  </section>
+
 </main>
 

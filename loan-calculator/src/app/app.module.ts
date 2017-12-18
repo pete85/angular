@@ -8,13 +8,14 @@ import { FormsModule } from '@angular/forms';
 import {MatListModule} from '@angular/material/list';
 import {MatTableModule} from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material';
+import {MatMenuModule} from '@angular/material/menu';
 
 import {
   MatInputModule,
   MatSelectModule,
 } from '@angular/material';
 import { SourcesComponent } from './sources/sources.component';
-import { PaymentsComponent } from './payments/payments.component';
+import { PaymentsComponent } from './home/payments/payments.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './not-found/not-found.component';
@@ -37,6 +38,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
     FormsModule,
     MatListModule,
     MatTableModule,
+    MatMenuModule,
     MatPaginatorModule,
     RouterModule.forRoot([
       {
@@ -46,6 +48,10 @@ import { NotFoundComponent } from './not-found/not-found.component';
       {
         path: 'sources',
         component: SourcesComponent
+      },
+      {
+        path: 'payments',
+        component: PaymentsComponent
       },
       {
         path: '**',
@@ -62,7 +68,13 @@ import { NotFoundComponent } from './not-found/not-found.component';
     FormsModule,
     MatListModule,
     MatTableModule,
-    MatPaginatorModule
+    MatMenuModule,
+    MatPaginatorModule,
+    SourcesComponent,
+    PaymentsComponent,
+    NavbarComponent,
+    HomeComponent,
+    NotFoundComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]

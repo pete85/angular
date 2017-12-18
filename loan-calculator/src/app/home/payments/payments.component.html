@@ -1,0 +1,36 @@
+<mat-table #table [dataSource]="dataSource">
+
+  <!-- Month Column -->
+  <ng-container matColumnDef="month">
+    <mat-header-cell *matHeaderCellDef> Month </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.month}} </mat-cell>
+  </ng-container>
+
+  <!-- Interest Column -->
+  <ng-container matColumnDef="interest">
+    <mat-header-cell *matHeaderCellDef> Interest </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.interest | currency:'GBP':'symbol'}} </mat-cell>
+  </ng-container>
+
+  <!-- Paid Column -->
+  <ng-container matColumnDef="paid">
+    <mat-header-cell *matHeaderCellDef> Paid </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.paid | currency:'GBP':'symbol'}} </mat-cell>
+  </ng-container>
+
+  <!-- Balance Column -->
+  <ng-container matColumnDef="balance">
+    <mat-header-cell *matHeaderCellDef> Balance </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.balance | currency:'GBP':'symbol'}} </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
+
+<mat-paginator #paginator
+               [length]="balanceListMonthly.length"
+               [pageIndex]="0"
+               [pageSize]="25"
+               [pageSizeOptions]="[5, 10, 25, 100]">
+</mat-paginator>
