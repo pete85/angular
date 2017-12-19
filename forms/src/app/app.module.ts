@@ -8,13 +8,17 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ModalModule } from 'ngx-bootstrap/modal';
 
 // ROUTER
-import { RouterModule } from '@angular/router';
+import {routing} from './app.routing';
 
+// COMPONENTS
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { SourcesComponent } from './sources/sources.component';
+import { AboutComponent } from './about/about.component';
+
+// MODULES
+import { ProjectFormsModule } from './forms/forms.module';
 
 
 @NgModule({
@@ -23,7 +27,7 @@ import { SourcesComponent } from './sources/sources.component';
     HomeComponent,
     NavigationComponent,
     NotFoundComponent,
-    SourcesComponent
+    AboutComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,26 +35,14 @@ import { SourcesComponent } from './sources/sources.component';
     TooltipModule.forRoot(),
     ModalModule.forRoot(),
     AlertModule.forRoot(),
-    RouterModule.forRoot([
-      {
-        path: '',
-        component: HomeComponent
-      },
-      {
-        path: 'sources',
-        component: SourcesComponent
-      },
-      {
-        path: '**',
-        component: NotFoundComponent
-      },
-
-    ])
+    routing,
+    ProjectFormsModule
   ],
   exports: [
     BsDropdownModule,
     TooltipModule,
-    ModalModule
+    ModalModule,
+    ProjectFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
