@@ -16,4 +16,9 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 ## Use
 
+1. Clone/download angular repository
+2. Run npm install inside material-form directory
+3. Run test server in terminal/cmd using _node server.js_ command
+4. Run material-form app using _ng serve_ command
+
 
