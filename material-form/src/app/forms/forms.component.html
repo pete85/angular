@@ -1,0 +1,174 @@
+<div class="container" *ngIf="languages.length == 0">
+  <h3>Form loading...</h3>
+</div>
+
+<main>
+  <div class="form-container" *ngIf="languages.length > 0">
+
+    <div class="close" *ngIf="submitted">
+      <i class="material-icons closeIcon" (click)="backToForm()">close</i>
+    </div>
+
+    <h2>Angular Form</h2>
+
+    <form
+      #form="ngForm"
+      novalidate
+      (submit)="submitForm(form)"
+      class="example-form"
+      *ngIf="!submitted">
+
+
+      <h3>Personal details</h3>
+      <!-- FIRST NAME -->
+      <p>
+        <md-input-container class="example-full-width" [class.has-error]="firstName.invalid && firstName.touched"
+                            [class.has-success]="firstName.valid">
+          <!--Banana in a box 2-way binding does not allow function calls -->
+          <!--<input class="form-control" type="text" required placeholder="First Name" name="firstName" id="firstName" [(ngModel)]="model.firstName">-->
+          <!--Using this approach for 2-way data binding function can be called-->
+          <input
+            mdInput
+            #firstName="ngModel"
+            required
+            type="text"
+            placeholder="First Name"
+            name="firstName"
+            id="firstName"
+            [ngModel]="model.firstName"
+            (ngModelChange)="model.firstName=$event"
+          >
+          <div *ngIf="firstName.invalid && firstName.touched" class="alertMessage">
+            <b>First Name</b> is required.
+          </div>
+        </md-input-container>
+      </p>
+
+      <!-- LAST NAME -->
+      <p>
+        <md-input-container class="example-full-width" [class.has-error]="lastName.invalid && lastName.touched"
+                            [class.has-success]="lastName.valid">
+          <input
+            mdInput
+            #lastName="ngModel"
+            required
+            type="text"
+            placeholder="Last Name"
+            name="lastName"
+            id="lastName"
+            [(ngModel)]="model.lastName"
+          >
+          <div *ngIf="lastName.invalid && lastName.touched" class="alertMessage">
+            <b>Last Name</b> is required.
+          </div>
+        </md-input-container>
+      </p>
+
+      <!-- EMAIL -->
+      <p>
+        <md-input-container class="example-full-width" [class.has-error]="email.invalid && email.touched"
+                            [class.has-success]="email.valid">
+          <input
+            mdInput
+            #email="ngModel"
+            required
+            type="email"
+            placeholder="Email"
+            name="email"
+            id="email"
+            [(ngModel)]="model.email"
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+          >
+          <div *ngIf="email.invalid && email.touched" class="alertMessage">
+            <b>Valid email address</b> is required.
+          </div>
+        </md-input-container>
+      </p>
+
+      <!--DROP DOWN-->
+      <div class="form-group margin-tb-15" [class.has-error]="hasLanguageError"
+           [class.has-success]="hasLanguageError == false">
+        <!--<label class="control-label" for="language">Language</label>-->
+        <select
+          name="language"
+          id="language"
+          class="form-control"
+          #language
+          [(ngModel)]="model.language"
+          (blur)="validateLanguage(language.value)"
+          (change)="validateLanguage(language.value)"
+          required>
+          <option value="default">Select a language...</option>
+          <option *ngFor="let language of languages">{{language}}</option>
+        </select>
+      </div>
+
+      <hr/>
+
+      <h3>Employment status</h3>
+
+      <!-- CHECKBOX -->
+      <div class="example-section">
+        <md-checkbox class="example-margin" name="is-full-time" [(ngModel)]="model.isFullTime">
+          Full Time Employee
+        </md-checkbox>
+      </div>
+
+      <!--&lt;!&ndash; RADIO BUTTONS &ndash;&gt;-->
+      <!--<md-radio-group class="example-radio-group margin-tb-15" name="paymentType" [(ngModel)]="paymentType">-->
+        <!--<label class="control-label" for="tax">Tax code</label>-->
+        <!--<md-radio-button-->
+          <!--name="tax"-->
+          <!--id="tax"-->
+          <!--class="example-radio-button"-->
+          <!--*ngFor="let payment of payments"-->
+          <!--[value]="payment">-->
+          <!--{{payment}}-->
+        <!--</md-radio-button>-->
+      <!--</md-radio-group>-->
+
+      <md-radio-group class="example-radio-group margin-tb-15" name="paymentType" [(ngModel)]="model.paymentType">
+        <label class="control-label">Tax code</label>
+        <md-radio-button
+          class="example-radio-button"
+          *ngFor="let payment of payments"
+          [value]="payment">
+          {{payment}}
+        </md-radio-button>
+      </md-radio-group>
+
+      <div class="example-section">
+        <button
+          md-raised-button
+          color="primary"
+          type="submit"
+          id="btnSubmit"
+          [disabled]="form.invalid || hasLanguageError">OK
+        </button>
+      </div>
+    </form>
+
+    <div id="formResults" *ngIf="submitted">
+
+      <div id="left">
+        <h3>First Name</h3>
+        <h3>Last Name</h3>
+        <h3>Email</h3>
+        <h3>Language</h3>
+        <h3>Employed</h3>
+        <h3>Tax Code</h3>
+      </div>
+      <div id="right">
+        <h3>{{model.firstName}}</h3>
+        <h3>{{model.lastName}}</h3>
+        <h3>{{model.email}}</h3>
+        <h3>{{model.language}}</h3>
+        <h3>{{model.isFullTime?'Yes':'No'}}</h3>
+        <h3>{{model.paymentType}}</h3>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<!--{{form.pristine}}-->
