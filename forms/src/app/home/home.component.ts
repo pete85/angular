@@ -16,4 +16,12 @@ export class HomeComponent implements OnInit {
   goLogin(): void {
     this._router.navigateByUrl('login');
   }
+
+  goSignUp(): void {
+    this._router.navigateByUrl('signup');
+  }
+
+  goMaterialForm(): void {
+    window.open('http://pete85.com/projects/angular/forms/material/');
+  }
 }
