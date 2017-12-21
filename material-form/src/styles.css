@@ -35,7 +35,7 @@ main {
   box-shadow: 5px 5px 15px 0px rgba(0,0,0,0.75);
 }
 
-md-input-container {
+mat-form-field {
   width: 100%;
 }
 
