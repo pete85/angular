@@ -5,10 +5,10 @@ import { Customer } from '../customer';
 
 @Component({
   selector: 'app-signup-form',
-  templateUrl: './signup-form.component.html',
-  styleUrls: ['./signup-form.component.scss']
+  templateUrl: './signup-form-reactive.component.html',
+  styleUrls: ['./signup-form-reactive.component.scss']
 })
-export class SignupFormComponent implements OnInit {
+export class SignupFormReactiveComponent implements OnInit {
 
   customer: Customer= new Customer();
 

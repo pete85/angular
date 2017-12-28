@@ -21,6 +21,10 @@ export class HomeComponent implements OnInit {
     this._router.navigateByUrl('signup');
   }
 
+  goSignUp2(): void {
+    this._router.navigateByUrl('signup-reactive');
+  }
+
   goMaterialForm(): void {
     window.open('http://pete85.com/projects/angular/forms/material/');
   }
