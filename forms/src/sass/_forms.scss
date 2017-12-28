@@ -1,4 +1,28 @@
-.signInWrapper {
-  width: 90%;
+// SIGN UP FORM
+
+.form-control {
+  border-radius: 0;
+}
+
+.panel {
+  width: 50%;
+  max-width: 95%;
   margin: 0 auto;
+  .panel-heading {
+    text-align: center;
+    padding: 20px;
+  }
+}
+
+.radio-inline {
+  input {
+    margin: 0 10px;
+  }
+}
+
+.help-block {
+  background: $lightRed;
+  padding: 8px;
+  width: 100%;
+  color: $red;
 }

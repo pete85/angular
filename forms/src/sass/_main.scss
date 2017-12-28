@@ -1,0 +1,22 @@
+.container-fluid {
+  margin-top: 60px;
+}
+
+.formLinkBox {
+  background: $darkGrey;
+  color: $white;
+  -webkit-box-shadow: 5px 5px 15px 0px rgba(52,58,64,1);
+  -moz-box-shadow: 5px 5px 15px 0px rgba(52,58,64,1);
+  box-shadow: 5px 5px 15px 0px rgba(52,58,64,1);
+  padding: 50px 10px;
+  text-align: center;
+  transition: all 0.5s ease;
+  &:hover {
+    background: $lightGrey;
+    color: $darkGrey;
+    cursor: pointer;
+  }
+  h3 {
+    margin: 0;
+  }
+}
