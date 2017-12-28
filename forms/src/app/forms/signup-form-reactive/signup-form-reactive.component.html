@@ -4,10 +4,11 @@
   </div>
 
   <div class="panel-body">
-    <form class="form-horizontal"
-          novalidate
-          (ngSubmit)="save(signupForm)"
-          #signupForm="ngForm">
+    <!--<form class="form-horizontal"-->
+          <!--novalidate-->
+          <!--(ngSubmit)="save()"-->
+          <!--#signupForm="ngForm">-->
+    <form (ngSubmit)="save()" [formGroup]="signupForm">
       <fieldset>
 
         <!--FIRST NAME-->
@@ -21,11 +22,8 @@
                    id="firstNameId"
                    type="text"
                    placeholder="First Name (required)"
-                   required
-                   minlength="3"
-                   [(ngModel)]=customer.firstName
-                   name="firstName"
-                   #firstNameVar="ngModel"/>
+                   formControlName="firstName"
+                   required/>
             <div
               class="help-block animated fadeIn"
               *ngIf="(firstNameVar.touched || firstNameVar.dirty) && firstNameVar.errors">

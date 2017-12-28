@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
 
-import { Customer } from '../customer';
+// REACTIVE FORM BUILDING BLOCKS
+// FormGroup is used as a data type for form model. Root FormGroup is the form itself.
+import {FormGroup, FormControl} from '@angular/forms';
+
+import {Customer} from '../customer';
 
 @Component({
   selector: 'app-signup-form',
@@ -10,8 +13,8 @@ import { Customer } from '../customer';
 })
 export class SignupFormReactiveComponent implements OnInit {
 
-  customer: Customer= new Customer();
-
+  signupForm: FormGroup;
+  customer: Customer = new Customer();
   counties = [
     {code: 'BED', name: 'Bedfordshire'},
     {code: 'BER', name: 'Berkshire'},
@@ -50,16 +53,23 @@ export class SignupFormReactiveComponent implements OnInit {
     {code: 'YOR', name: 'Yorkshire'}
   ];
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
+    // Root FormGroup initialisation
+    this.signupForm = new FormGroup({
+      firstName: new FormControl(),
+      lastName: new FormControl(),
+      email: new FormControl(),
+      sendCatalog: new FormControl(true)
+    });
   }
 
 
-
-  save(customerForm) {
-    console.log(customerForm.form);
-    console.log('Saved: ' + JSON.stringify(customerForm.value));
+  save() {
+    console.log(this.signupForm);
+    console.log('Saved: ' + JSON.stringify(this.signupForm.value));
   }
 
 }
