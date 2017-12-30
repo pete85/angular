@@ -72,4 +72,20 @@ export class SignupFormReactiveComponent implements OnInit {
     console.log('Saved: ' + JSON.stringify(this.signupForm.value));
   }
 
+  setValue(): void {
+    this.signupForm.setValue({
+      firstName: 'Jack',
+      lastName: 'Smith',
+      email: 'jacksmith@gmail.com',
+      sendCatalog: false
+    });
+  }
+
+  patchValue(): void {
+    this.signupForm.patchValue({
+      firstName: 'Jack',
+      lastName: 'Smith',
+    });
+  }
+
 }
