@@ -53,6 +53,10 @@ export class SignupFormReactiveComponent implements OnInit {
     {code: 'YOR', name: 'Yorkshire'}
   ];
 
+  regexEmail = '^(([^<>()\\[\\]\\\\.,;:\\s@"]+(\\.[^<>()\\[\\]\\\\.,;:\\s@"]+)*)|(".+"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$';
+
+  regexPhone = '^(?:(?:\\(?(?:0(?:0|11)\\)?[\\s-]?\\(?|\\+)44\\)?[\\s-]?(?:\\(?0\\)?[\\s-]?)?)|(?:\\(?0))(?:(?:\\d{5}\\)?[\\s-]?\\d{4,5})|(?:\\d{4}\\)?[\\s-]?(?:\\d{5}|\\d{3}[\\s-]?\\d{3}))|(?:\\d{3}\\)?[\\s-]?\\d{3}[\\s-]?\\d{3,4})|(?:\\d{2}\\)?[\\s-]?\\d{4}[\\s-]?\\d{4}))(?:[\\s-]?(?:x|ext\\.?|\\#)\\d{3,4})?$';
+
   constructor(private _formBuilder: FormBuilder) {
   }
 
@@ -66,8 +70,8 @@ export class SignupFormReactiveComponent implements OnInit {
       lastName: ['', [Validators.required, Validators.maxLength(15)]],
       // lastName: '',
       // lastName: {value: 'n/a', disabled: true},
-      email: ['', [Validators.required, Validators.pattern('^(([^<>()\\[\\]\\\\.,;:\\s@"]+(\\.[^<>()\\[\\]\\\\.,;:\\s@"]+)*)|(".+"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$')]],
-      phone: ['', Validators.pattern('^(?:(?:\\(?(?:0(?:0|11)\\)?[\\s-]?\\(?|\\+)44\\)?[\\s-]?(?:\\(?0\\)?[\\s-]?)?)|(?:\\(?0))(?:(?:\\d{5}\\)?[\\s-]?\\d{4,5})|(?:\\d{4}\\)?[\\s-]?(?:\\d{5}|\\d{3}[\\s-]?\\d{3}))|(?:\\d{3}\\)?[\\s-]?\\d{3}[\\s-]?\\d{3,4})|(?:\\d{2}\\)?[\\s-]?\\d{4}[\\s-]?\\d{4}))(?:[\\s-]?(?:x|ext\\.?|\\#)\\d{3,4})?$')],
+      email: ['', [Validators.required, Validators.pattern(this.regexEmail)]],
+      phone: ['', Validators.pattern(this.regexPhone)],
       notification: 'email',
       sendCatalog: true
     });
@@ -84,7 +88,7 @@ export class SignupFormReactiveComponent implements OnInit {
     const phoneControl = this.signupForm.get('phone');
     if (notifyVia === 'text') {
       document.getElementById('phoneRequired').innerHTML = '*';
-      phoneControl.setValidators([Validators.required, Validators.pattern('^(?:(?:\\(?(?:0(?:0|11)\\)?[\\s-]?\\(?|\\+)44\\)?[\\s-]?(?:\\(?0\\)?[\\s-]?)?)|(?:\\(?0))(?:(?:\\d{5}\\)?[\\s-]?\\d{4,5})|(?:\\d{4}\\)?[\\s-]?(?:\\d{5}|\\d{3}[\\s-]?\\d{3}))|(?:\\d{3}\\)?[\\s-]?\\d{3}[\\s-]?\\d{3,4})|(?:\\d{2}\\)?[\\s-]?\\d{4}[\\s-]?\\d{4}))(?:[\\s-]?(?:x|ext\\.?|\\#)\\d{3,4})?$')]);
+      phoneControl.setValidators([Validators.required, Validators.pattern(this.regexPhone)]);
     } else {
       document.getElementById('phoneRequired').innerHTML = '';
       phoneControl.clearValidators();
@@ -98,10 +102,13 @@ export class SignupFormReactiveComponent implements OnInit {
   }
 
   setValue(): void {
+    document.getElementById('phoneRequired').innerHTML = '*';
     this.signupForm.setValue({
       firstName: 'Jack',
       lastName: 'Smith',
       email: 'jacksmith@gmail.com',
+      phone: '07247110457',
+      notification: 'text',
       sendCatalog: false
     });
   }
