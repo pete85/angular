@@ -14,16 +14,14 @@
         <div class="form-group row"
              [ngClass]="{'has-error': (signupForm.get('firstName').touched || signupForm.get('firstName').dirty) && !signupForm.get('firstName').valid }">
           <div class="col-md-3">
-            <label class="control-label" for="firstNameId">First Name</label>
+            <label class="control-label" for="firstNameId">First Name *</label>
           </div>
           <div class="col-md-9">
             <input class="form-control"
                    id="firstNameId"
                    type="text"
-                   placeholder="First Name (required)"
-                   minlength="3"
-                   formControlName="firstName"
-                   required/>
+                   placeholder="First Name"
+                   formControlName="firstName"/>
             <div
               class="help-block animated fadeIn"
               *ngIf="(signupForm.get('firstName').touched || signupForm.get('firstName').dirty) && signupForm.get('firstName').errors">
@@ -41,15 +39,13 @@
         <div class="form-group row"
              [ngClass]="{'has-error': (signupForm.get('lastName').touched || signupForm.get('lastName').dirty) && !signupForm.get('lastName').valid }">
           <div class="col-md-3">
-            <label class="control-label" for="lastNameId">Last Name</label>
+            <label class="control-label" for="lastNameId">Last Name *</label>
           </div>
           <div class="col-md-9">
             <input class="form-control"
                    id="lastNameId"
                    type="text"
-                   placeholder="Last Name (required)"
-                   required
-                   maxlength="50"
+                   placeholder="Last Name"
                    formControlName="lastName"/>
             <div
               class="help-block animated fadeIn"
@@ -65,15 +61,13 @@
         <div class="form-group row"
              [ngClass]="{'has-error': (signupForm.get('email').touched || signupForm.get('email').dirty) && !signupForm.get('email').valid }">
           <div class="col-md-3">
-            <label class="control-label" for="emailId">Email</label>
+            <label class="control-label" for="emailId">Email *</label>
           </div>
           <div class="col-md-9">
             <input class="form-control"
                    id="emailId"
                    type="email"
-                   placeholder="Email (required)"
-                   required
-                   pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+"
+                   placeholder="Email"
                    formControlName="email"/>
             <div
               class="help-block animated fadeIn"
@@ -93,6 +87,51 @@
           </div>
         </div>
 
+        <!--PHONE-->
+        <div class="form-group row"
+             [ngClass]="{'has-error': (signupForm.get('phone').touched || signupForm.get('phone').dirty) && !signupForm.get('phone').valid }">
+          <div class="col-md-3">
+            <label class="control-label" for="phoneId">Phone <span id="phoneRequired" class=""></span></label>
+          </div>
+          <div class="col-md-9">
+            <input class="form-control"
+                   id="phoneId"
+                   type="tel"
+                   placeholder="Phone"
+                   formControlName="phone"/>
+            <div
+              class="help-block animated fadeIn"
+              *ngIf="(signupForm.get('phone').touched || signupForm.get('phone').dirty) && signupForm.get('phone').errors">
+              <span *ngIf="signupForm.get('phone').errors.required">
+                  Please enter your phone number.
+              </span>
+              <span *ngIf="signupForm.get('phone').errors.pattern">
+                  Please enter a valid phone number.
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!--NOTIFICATIONS-->
+        <div class="form-group row">
+          <label class="col-md-3 control-label">Notifications</label>
+          <div class="col-md-9">
+            <label class="radio-inline">
+              <input type="radio"
+                     value="email"
+                     formControlName="notification"
+                     (click)="setNotification('email')">Email
+            </label>
+            <label class="radio-inline">
+              <input type="radio"
+                     value="text"
+                     formControlName="notification"
+                     (click)="setNotification('text')">Text
+            </label>
+          </div>
+        </div>
+
+
         <!--SEND CATALOG-->
         <div class="form-group row">
           <div class="col-md-12 checkbox">
@@ -107,106 +146,106 @@
 
         <!--<div *ngIf="customer.sendCatalog" class="animated fadeIn">-->
 
-          <!--&lt;!&ndash;ADDRESS TYPE&ndash;&gt;-->
-          <!--<div class="form-group row">-->
-            <!--<div class="col-md-3">-->
-              <!--<label class="control-label">Address Type</label>-->
-            <!--</div>-->
-            <!--<div class="col-md-9">-->
-              <!--<label class="radio-inline">-->
-                <!--<input type="radio" id="addressType1Id" value="home"-->
-                       <!--[(ngModel)]="customer.addressType"-->
-                       <!--name="addressType">Home-->
-              <!--</label>-->
-              <!--<label class="radio-inline">-->
-                <!--<input type="radio" id="addressType2Id" value="work"-->
-                       <!--[(ngModel)]="customer.addressType"-->
-                       <!--name="addressType">Work-->
-              <!--</label>-->
-              <!--<label class="radio-inline">-->
-                <!--<input type="radio" id="addressType3Id" value="other"-->
-                       <!--[(ngModel)]="customer.addressType"-->
-                       <!--name="addressType">Other-->
-              <!--</label>-->
-            <!--</div>-->
-          <!--</div>-->
+        <!--&lt;!&ndash;ADDRESS TYPE&ndash;&gt;-->
+        <!--<div class="form-group row">-->
+        <!--<div class="col-md-3">-->
+        <!--<label class="control-label">Address Type</label>-->
+        <!--</div>-->
+        <!--<div class="col-md-9">-->
+        <!--<label class="radio-inline">-->
+        <!--<input type="radio" id="addressType1Id" value="home"-->
+        <!--[(ngModel)]="customer.addressType"-->
+        <!--name="addressType">Home-->
+        <!--</label>-->
+        <!--<label class="radio-inline">-->
+        <!--<input type="radio" id="addressType2Id" value="work"-->
+        <!--[(ngModel)]="customer.addressType"-->
+        <!--name="addressType">Work-->
+        <!--</label>-->
+        <!--<label class="radio-inline">-->
+        <!--<input type="radio" id="addressType3Id" value="other"-->
+        <!--[(ngModel)]="customer.addressType"-->
+        <!--name="addressType">Other-->
+        <!--</label>-->
+        <!--</div>-->
+        <!--</div>-->
 
-          <!--&lt;!&ndash;ADDRESS 1&ndash;&gt;-->
-          <!--<div class="form-group row">-->
-            <!--<div class="col-md-3">-->
-              <!--<label class="control-label" for="street1Id">Address 1</label>-->
-            <!--</div>-->
-            <!--<div class="col-md-9">-->
-              <!--<input type="text"-->
-                     <!--class="form-control"-->
-                     <!--id="street1Id"-->
-                     <!--placeholder="Street address"-->
-                     <!--[(ngModel)]="customer.street1"-->
-                     <!--name="street1">-->
-            <!--</div>-->
-          <!--</div>-->
+        <!--&lt;!&ndash;ADDRESS 1&ndash;&gt;-->
+        <!--<div class="form-group row">-->
+        <!--<div class="col-md-3">-->
+        <!--<label class="control-label" for="street1Id">Address 1</label>-->
+        <!--</div>-->
+        <!--<div class="col-md-9">-->
+        <!--<input type="text"-->
+        <!--class="form-control"-->
+        <!--id="street1Id"-->
+        <!--placeholder="Street address"-->
+        <!--[(ngModel)]="customer.street1"-->
+        <!--name="street1">-->
+        <!--</div>-->
+        <!--</div>-->
 
-          <!--&lt;!&ndash;ADDRESS 2&ndash;&gt;-->
-          <!--<div class="form-group row">-->
-            <!--<div class="col-md-3">-->
-              <!--<label class="control-label" for="street2Id">Address 2</label>-->
-            <!--</div>-->
-            <!--<div class="col-md-9">-->
-              <!--<input type="text"-->
-                     <!--class="form-control"-->
-                     <!--id="street2Id"-->
-                     <!--placeholder="Street address (second line)"-->
-                     <!--[(ngModel)]="customer.street2"-->
-                     <!--name="street2">-->
-            <!--</div>-->
-          <!--</div>-->
+        <!--&lt;!&ndash;ADDRESS 2&ndash;&gt;-->
+        <!--<div class="form-group row">-->
+        <!--<div class="col-md-3">-->
+        <!--<label class="control-label" for="street2Id">Address 2</label>-->
+        <!--</div>-->
+        <!--<div class="col-md-9">-->
+        <!--<input type="text"-->
+        <!--class="form-control"-->
+        <!--id="street2Id"-->
+        <!--placeholder="Street address (second line)"-->
+        <!--[(ngModel)]="customer.street2"-->
+        <!--name="street2">-->
+        <!--</div>-->
+        <!--</div>-->
 
-          <!--&lt;!&ndash;CITY&ndash;&gt;-->
-          <!--<div class="form-group row">-->
-            <!--<div class="col-md-3">-->
-              <!--<label class="control-label" for="cityId">City</label>-->
-            <!--</div>-->
-            <!--<div class="col-md-9">-->
-              <!--<input type="text"-->
-                     <!--class="form-control"-->
-                     <!--id="cityId"-->
-                     <!--placeholder="City"-->
-                     <!--[(ngModel)]="customer.city"-->
-                     <!--name="city">-->
-            <!--</div>-->
-          <!--</div>-->
+        <!--&lt;!&ndash;CITY&ndash;&gt;-->
+        <!--<div class="form-group row">-->
+        <!--<div class="col-md-3">-->
+        <!--<label class="control-label" for="cityId">City</label>-->
+        <!--</div>-->
+        <!--<div class="col-md-9">-->
+        <!--<input type="text"-->
+        <!--class="form-control"-->
+        <!--id="cityId"-->
+        <!--placeholder="City"-->
+        <!--[(ngModel)]="customer.city"-->
+        <!--name="city">-->
+        <!--</div>-->
+        <!--</div>-->
 
-          <!--&lt;!&ndash;COUNTY&ndash;&gt;-->
-          <!--<div class="form-group row">-->
-            <!--<div class="col-md-3">-->
-              <!--<label class="control-label" for="countyId">County</label>-->
-            <!--</div>-->
-            <!--<div class="col-md-9">-->
-              <!--<select class="form-control"-->
-                      <!--id="countyId"-->
-                      <!--[(ngModel)]="customer.county"-->
-                      <!--name="county">-->
-                <!--<option value="" disabled selected hidden>Select a County...</option>-->
-                <!--<option *ngFor="let county of counties" [value]="county.code">{{county.name}}</option>-->
-              <!--</select>-->
-            <!--</div>-->
-          <!--</div>-->
+        <!--&lt;!&ndash;COUNTY&ndash;&gt;-->
+        <!--<div class="form-group row">-->
+        <!--<div class="col-md-3">-->
+        <!--<label class="control-label" for="countyId">County</label>-->
+        <!--</div>-->
+        <!--<div class="col-md-9">-->
+        <!--<select class="form-control"-->
+        <!--id="countyId"-->
+        <!--[(ngModel)]="customer.county"-->
+        <!--name="county">-->
+        <!--<option value="" disabled selected hidden>Select a County...</option>-->
+        <!--<option *ngFor="let county of counties" [value]="county.code">{{county.name}}</option>-->
+        <!--</select>-->
+        <!--</div>-->
+        <!--</div>-->
 
-          <!--&lt;!&ndash;POSTCODE&ndash;&gt;-->
-          <!--<div class="form-group row">-->
-            <!--<div class="col-md-3">-->
-              <!--<label class="control-label" for="postcodeId">Postcode</label>-->
-            <!--</div>-->
+        <!--&lt;!&ndash;POSTCODE&ndash;&gt;-->
+        <!--<div class="form-group row">-->
+        <!--<div class="col-md-3">-->
+        <!--<label class="control-label" for="postcodeId">Postcode</label>-->
+        <!--</div>-->
 
-            <!--<div class="col-md-4 col-md-offset-5">-->
-              <!--<input type="number"-->
-                     <!--class="form-control"-->
-                     <!--id="postcodeId"-->
-                     <!--placeholder="Postcode"-->
-                     <!--[(ngModel)]="customer.postcode"-->
-                     <!--name="postcode">-->
-            <!--</div>-->
-          <!--</div>-->
+        <!--<div class="col-md-4 col-md-offset-5">-->
+        <!--<input type="number"-->
+        <!--class="form-control"-->
+        <!--id="postcodeId"-->
+        <!--placeholder="Postcode"-->
+        <!--[(ngModel)]="customer.postcode"-->
+        <!--name="postcode">-->
+        <!--</div>-->
+        <!--</div>-->
         <!--</div>-->
 
         <div class="form-group row">

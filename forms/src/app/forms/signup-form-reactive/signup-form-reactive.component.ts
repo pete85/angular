@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 
 // REACTIVE FORM BUILDING BLOCKS
 // FormGroup is used as a data type for form model. Root FormGroup is the form itself.
-import {FormGroup, FormControl} from '@angular/forms';
+import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 
 import {Customer} from '../customer';
 
@@ -53,19 +53,44 @@ export class SignupFormReactiveComponent implements OnInit {
     {code: 'YOR', name: 'Yorkshire'}
   ];
 
-  constructor() {
+  constructor(private _formBuilder: FormBuilder) {
   }
 
   ngOnInit() {
+
+    document.getElementById('phoneRequired').innerHTML = '';
+
     // Root FormGroup initialisation
-    this.signupForm = new FormGroup({
-      firstName: new FormControl(),
-      lastName: new FormControl(),
-      email: new FormControl(),
-      sendCatalog: new FormControl(true)
+    this.signupForm = this._formBuilder.group({
+      firstName: ['', [Validators.required, Validators.minLength(3)]],
+      lastName: ['', [Validators.required, Validators.maxLength(15)]],
+      // lastName: '',
+      // lastName: {value: 'n/a', disabled: true},
+      email: ['', [Validators.required, Validators.pattern('^(([^<>()\\[\\]\\\\.,;:\\s@"]+(\\.[^<>()\\[\\]\\\\.,;:\\s@"]+)*)|(".+"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$')]],
+      phone: ['', Validators.pattern('^(?:(?:\\(?(?:0(?:0|11)\\)?[\\s-]?\\(?|\\+)44\\)?[\\s-]?(?:\\(?0\\)?[\\s-]?)?)|(?:\\(?0))(?:(?:\\d{5}\\)?[\\s-]?\\d{4,5})|(?:\\d{4}\\)?[\\s-]?(?:\\d{5}|\\d{3}[\\s-]?\\d{3}))|(?:\\d{3}\\)?[\\s-]?\\d{3}[\\s-]?\\d{3,4})|(?:\\d{2}\\)?[\\s-]?\\d{4}[\\s-]?\\d{4}))(?:[\\s-]?(?:x|ext\\.?|\\#)\\d{3,4})?$')],
+      notification: 'email',
+      sendCatalog: true
     });
+
+    // this.signupForm = new FormGroup({
+    //   firstName: new FormControl(),
+    //   lastName: new FormControl(),
+    //   email: new FormControl(),
+    //   sendCatalog: new FormControl(true)
+    // });
   }
 
+  setNotification(notifyVia: string): void {
+    const phoneControl = this.signupForm.get('phone');
+    if (notifyVia === 'text') {
+      document.getElementById('phoneRequired').innerHTML = '*';
+      phoneControl.setValidators([Validators.required, Validators.pattern('^(?:(?:\\(?(?:0(?:0|11)\\)?[\\s-]?\\(?|\\+)44\\)?[\\s-]?(?:\\(?0\\)?[\\s-]?)?)|(?:\\(?0))(?:(?:\\d{5}\\)?[\\s-]?\\d{4,5})|(?:\\d{4}\\)?[\\s-]?(?:\\d{5}|\\d{3}[\\s-]?\\d{3}))|(?:\\d{3}\\)?[\\s-]?\\d{3}[\\s-]?\\d{3,4})|(?:\\d{2}\\)?[\\s-]?\\d{4}[\\s-]?\\d{4}))(?:[\\s-]?(?:x|ext\\.?|\\#)\\d{3,4})?$')]);
+    } else {
+      document.getElementById('phoneRequired').innerHTML = '';
+      phoneControl.clearValidators();
+    }
+    phoneControl.updateValueAndValidity();
+  }
 
   save() {
     console.log(this.signupForm);
