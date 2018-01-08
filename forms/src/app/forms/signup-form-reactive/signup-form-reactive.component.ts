@@ -2,9 +2,27 @@ import {Component, OnInit} from '@angular/core';
 
 // REACTIVE FORM BUILDING BLOCKS
 // FormGroup is used as a data type for form model. Root FormGroup is the form itself.
-import {FormGroup, FormBuilder, Validators} from '@angular/forms';
+import {FormGroup, FormBuilder, Validators, AbstractControl, ValidatorFn} from '@angular/forms';
 
 import {Customer} from '../customer';
+
+// function ratingRange(c: AbstractControl): {[key: string]: boolean} | null {
+//   if (c.value != undefined && (isNaN(c.value) || c.value > 5)) {
+//     return {'range': true};
+//   }
+//   return null;
+//
+// }
+
+function ratingRange(min: number, max: number): ValidatorFn {
+  return (c: AbstractControl): { [key: string]: boolean } | null => {
+    if (c.value !== undefined && (isNaN(c.value) || c.value < min || c.value > max)) {
+      return {'range': true};
+    }
+    ;
+    return null;
+  };
+}
 
 @Component({
   selector: 'app-signup-form',
@@ -63,18 +81,7 @@ export class SignupFormReactiveComponent implements OnInit {
   ngOnInit() {
 
     document.getElementById('phoneRequired').innerHTML = '';
-
-    // Root FormGroup initialisation
-    this.signupForm = this._formBuilder.group({
-      firstName: ['', [Validators.required, Validators.minLength(3)]],
-      lastName: ['', [Validators.required, Validators.maxLength(15)]],
-      // lastName: '',
-      // lastName: {value: 'n/a', disabled: true},
-      email: ['', [Validators.required, Validators.pattern(this.regexEmail)]],
-      phone: ['', Validators.pattern(this.regexPhone)],
-      notification: 'email',
-      sendCatalog: true
-    });
+    this.setValuesInit();
 
     // this.signupForm = new FormGroup({
     //   firstName: new FormControl(),
@@ -101,6 +108,21 @@ export class SignupFormReactiveComponent implements OnInit {
     console.log('Saved: ' + JSON.stringify(this.signupForm.value));
   }
 
+  setValuesInit() {
+    // Root FormGroup initialisation
+    this.signupForm = this._formBuilder.group({
+      firstName: ['', [Validators.required, Validators.minLength(3)]],
+      lastName: ['', [Validators.required, Validators.maxLength(15)]],
+      // lastName: '',
+      // lastName: {value: 'n/a', disabled: true},
+      email: ['', [Validators.required, Validators.pattern(this.regexEmail)]],
+      notification: 'email',
+      phone: ['', Validators.pattern(this.regexPhone)],
+      rating: ['', ratingRange(1, 5)],
+      sendCatalog: true
+    });
+  }
+
   setValue(): void {
     document.getElementById('phoneRequired').innerHTML = '*';
     this.signupForm.setValue({
@@ -108,6 +130,7 @@ export class SignupFormReactiveComponent implements OnInit {
       lastName: 'Smith',
       email: 'jacksmith@gmail.com',
       phone: '07247110457',
+      rating: '',
       notification: 'text',
       sendCatalog: false
     });
