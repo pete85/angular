@@ -33,3 +33,13 @@
   padding: 30px 0;
   background: lighten($darkGrey, 20%);
 }
+
+input.has-error {
+  border: 2px solid rgba($red,0.4);
+  background: rgba($red,0.1);
+}
+
+input.ng-valid {
+  border: 2px solid rgba($green,0.4) !important;
+  background: rgba($green,0.1) !important;
+}

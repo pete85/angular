@@ -37,7 +37,11 @@
 
         <!--LAST NAME-->
         <div class="form-group row"
-             [ngClass]="{'has-error': (signupForm.get('lastName').touched || signupForm.get('lastName').dirty) && !signupForm.get('lastName').valid }">
+             [ngClass]="{'has-error': (
+             signupForm.get('lastName').touched ||
+             signupForm.get('lastName').dirty) &&
+             !signupForm.get('lastName').valid
+             }">
           <div class="col-md-3">
             <label class="control-label" for="lastNameId">Last Name *</label>
           </div>
@@ -57,35 +61,76 @@
           </div>
         </div>
 
-        <!--EMAIL-->
-        <div class="form-group row"
-             [ngClass]="{'has-error': (signupForm.get('email').touched || signupForm.get('email').dirty) && !signupForm.get('email').valid }">
-          <div class="col-md-3">
-            <label class="control-label" for="emailId">Email *</label>
-          </div>
-          <div class="col-md-9">
-            <input class="form-control"
-                   id="emailId"
-                   type="email"
-                   placeholder="Email"
-                   formControlName="email"/>
-            <div
-              class="help-block animated fadeIn"
-              *ngIf="(signupForm.get('email').touched || signupForm.get('email').dirty) && signupForm.get('email').errors">
-              <span *ngIf="signupForm.get('email').errors.required">
+        <!--EMAIL GROUP-->
+        <div formGroupName="emailGroup" [ngClass]="{'has-error': signupForm.get('emailGroup').errors}">
+
+          <!--EMAIL-->
+          <div class="form-group row"
+               [ngClass]="{'has-error': (
+               signupForm.get('emailGroup.email').touched ||
+               signupForm.get('emailGroup.email').dirty) &&
+               !signupForm.get('emailGroup.email').valid }">
+            <div class="col-md-3">
+              <label class="control-label" for="emailId">Email *</label>
+            </div>
+            <div class="col-md-9">
+              <input class="form-control"
+                     id="emailId"
+                     type="email"
+                     placeholder="Email"
+                     formControlName="email"/>
+              <div
+                class="help-block animated fadeIn"
+                *ngIf="
+                (signupForm.get('emailGroup.email').touched || signupForm.get('emailGroup.email').dirty) &&
+                signupForm.get('emailGroup.email').errors">
+              <span *ngIf="signupForm.get('emailGroup.email').errors.required">
                   Please enter your email address.
               </span>
-              <span *ngIf="signupForm.get('email').errors.pattern">
+                <span *ngIf="signupForm.get('emailGroup.email').errors.pattern">
                   Please enter a valid email address.
               </span>
 
-              <!-- This one does not work -->
-              <span *ngIf="signupForm.get('email').errors.email">
+                <!-- This one does not work -->
+                <span *ngIf="signupForm.get('emailGroup.email').errors.email">
                   Please enter a valid email address.
               </span>
+              </div>
+            </div>
+          </div>
+
+          <!--EMAIL CONFIRMATION-->
+          <div class="form-group row"
+               [ngClass]="{'has-error': (
+             signupForm.get('emailGroup.confirmEmail').touched ||
+             signupForm.get('emailGroup.confirmEmail').dirty) && !
+             signupForm.get('emailGroup.confirmEmail').valid
+             }">
+            <div class="col-md-3">
+              <label class="control-label" for="confirmEmailId">Confirm Email *</label>
+            </div>
+            <div class="col-md-9">
+              <input class="form-control"
+                     id="confirmEmailId"
+                     type="email"
+                     placeholder="Confirm Email"
+                     formControlName="confirmEmail"/>
+              <div
+                class="help-block animated fadeIn"
+                *ngIf="
+              (signupForm.get('emailGroup.confirmEmail').touched || signupForm.get('emailGroup.confirmEmail').dirty) &&
+              (signupForm.get('emailGroup.confirmEmail').errors || signupForm.get('emailGroup').errors)">
+              <span *ngIf="signupForm.get('emailGroup.confirmEmail').errors?.required">
+                  Please confirm your email address.
+              </span>
+                <span *ngIf="signupForm.get('emailGroup').errors?.match">
+                  The confirmation does not match the email address.
+                </span>
+              </div>
             </div>
           </div>
         </div>
+
 
         <!--PHONE-->
         <div class="form-group row"
@@ -108,6 +153,50 @@
               <span *ngIf="signupForm.get('phone').errors.pattern">
                   Please enter a valid phone number.
               </span>
+            </div>
+          </div>
+        </div>
+
+        <!--DATES-->
+        <div
+          class="form-group row"
+          formGroupName="availability"
+          [ngClass]="{'has-error': signupForm.get('availability').errors}">
+          <div class="col-md-3">
+            <label class="control-label" for="lastNameId">Availability *</label>
+          </div>
+          <div class="col-md-4">
+            <input class="form-control"
+                   id="startDateId"
+                   type="date"
+                   placeholder="Start"
+                   formControlName="start"/>
+            <div
+              class="help-block animated fadeIn"
+              *ngIf="(signupForm.get('availability.start').touched || signupForm.get('availability.start').dirty) && signupForm.get('availability.start').errors">
+              <span *ngIf="signupForm.get('availability.start').errors.required">
+                  Please enter the start date.
+              </span>
+            </div>
+          </div>
+          <div class="col-md-1"></div>
+          <div class="col-md-4">
+            <input class="form-control"
+                   id="endDateId"
+                   type="date"
+                   placeholder="End"
+                   formControlName="end"/>
+            <div
+              class="help-block animated fadeIn"
+              *ngIf="
+              (signupForm.get('availability.end').touched || signupForm.get('availability.end').dirty) &&
+              (signupForm.get('availability.end').errors || signupForm.get('availability').errors?.required)">
+              <span *ngIf="signupForm.get('availability.end').errors.required">
+                  Please enter the end date.
+              </span>
+              <span *ngIf="signupForm.get('availability').errors?.match">
+                  The end date cannot be set prior to the start date.
+                </span>
             </div>
           </div>
         </div>

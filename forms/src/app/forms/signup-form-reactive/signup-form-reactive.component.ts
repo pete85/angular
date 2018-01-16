@@ -24,6 +24,33 @@ function ratingRange(min: number, max: number): ValidatorFn {
   };
 }
 
+// *** CROSS-FIELD VALIDATIONS ***
+function dateCompare(c: AbstractControl): { [key: string]: boolean } | null {
+  const startControl = c.get('start');
+  const endControl = c.get('end');
+  if (startControl.pristine || endControl.pristine) {
+    return null;
+  }
+  if (endControl.value >= startControl.value) {
+    return null;
+  }
+  return {'match': true};
+}
+
+function emailMatcher(c: AbstractControl) {
+  const emailControl = c.get('email');
+  const confirmControl = c.get('confirmEmail');
+  if (emailControl.pristine || confirmControl.pristine) {
+    return null;
+  }
+  if (emailControl.value === confirmControl.value) {
+    return null;
+  }
+  return {'match': true};
+}
+
+// *** CROSS-FIELD VALIDATIONS END ***
+
 @Component({
   selector: 'app-signup-form',
   templateUrl: './signup-form-reactive.component.html',
@@ -113,9 +140,14 @@ export class SignupFormReactiveComponent implements OnInit {
     this.signupForm = this._formBuilder.group({
       firstName: ['', [Validators.required, Validators.minLength(3)]],
       lastName: ['', [Validators.required, Validators.maxLength(15)]],
-      // lastName: '',
-      // lastName: {value: 'n/a', disabled: true},
-      email: ['', [Validators.required, Validators.pattern(this.regexEmail)]],
+      emailGroup: this._formBuilder.group({
+        email: ['', [Validators.required, Validators.pattern(this.regexEmail)]],
+        confirmEmail: ['', [Validators.required]]
+      }, {validator: emailMatcher}),
+      availability: this._formBuilder.group({
+        start: ['', Validators.required],
+        end: ['', Validators.required]
+      }, {validator: dateCompare}),
       notification: 'email',
       phone: ['', Validators.pattern(this.regexPhone)],
       rating: ['', ratingRange(1, 5)],
@@ -128,7 +160,14 @@ export class SignupFormReactiveComponent implements OnInit {
     this.signupForm.setValue({
       firstName: 'Jack',
       lastName: 'Smith',
-      email: 'jacksmith@gmail.com',
+      emailGroup: {
+        email: '',
+        confirmEmail: ''
+      },
+      availability: {
+        start: '',
+        end: ''
+      },
       phone: '07247110457',
       rating: '',
       notification: 'text',
