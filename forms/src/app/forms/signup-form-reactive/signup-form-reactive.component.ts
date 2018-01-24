@@ -38,6 +38,7 @@ function dateCompare(c: AbstractControl): { [key: string]: boolean } | null {
   if (endControl.value < startControl.value) {
     return {'match': true};
   }
+  console.log('Function works!');
   return null;
 }
 
