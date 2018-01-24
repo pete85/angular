@@ -6,36 +6,16 @@ import {FormGroup, FormBuilder, Validators, AbstractControl, ValidatorFn} from '
 
 import {Customer} from '../customer';
 
-// function ratingRange(c: AbstractControl): {[key: string]: boolean} | null {
-//   if (c.value != undefined && (isNaN(c.value) || c.value > 5)) {
-//     return {'range': true};
-//   }
-//   return null;
-//
-// }
-
 function ratingRange(min: number, max: number): ValidatorFn {
   return (c: AbstractControl): { [key: string]: boolean } | null => {
     if (c.value !== undefined && (isNaN(c.value) || c.value < min || c.value > max)) {
       return {'range': true};
     }
-    ;
     return null;
   };
 }
 
 // *** CROSS-FIELD VALIDATIONS ***
-function dateCompare(c: AbstractControl): { [key: string]: boolean } | null {
-  const startControl = c.get('start');
-  const endControl = c.get('end');
-  if (startControl.pristine || endControl.pristine) {
-    return null;
-  }
-  if (endControl.value >= startControl.value) {
-    return null;
-  }
-  return {'match': true};
-}
 
 function emailMatcher(c: AbstractControl) {
   const emailControl = c.get('email');
@@ -49,6 +29,18 @@ function emailMatcher(c: AbstractControl) {
   return {'match': true};
 }
 
+function dateCompare(c: AbstractControl): { [key: string]: boolean } | null {
+  const startControl = c.get('start');
+  const endControl = c.get('end');
+  if (startControl.pristine || endControl.pristine) {
+    return null;
+  }
+  if (endControl.value < startControl.value) {
+    return {'match': true};
+  }
+  return null;
+}
+
 // *** CROSS-FIELD VALIDATIONS END ***
 
 @Component({
@@ -60,43 +52,43 @@ export class SignupFormReactiveComponent implements OnInit {
 
   signupForm: FormGroup;
   customer: Customer = new Customer();
-  counties = [
-    {code: 'BED', name: 'Bedfordshire'},
-    {code: 'BER', name: 'Berkshire'},
-    {code: 'BRI', name: 'Bristol'},
-    {code: 'BUC', name: 'Buckinghamshire'},
-    {code: 'CAM', name: 'Cambridgeshire'},
-    {code: 'CHE', name: 'Cheshire'},
-    {code: 'COR', name: 'Cornwall'},
-    {code: 'COU', name: 'County Durham'},
-    {code: 'DER', name: 'Derbyshire'},
-    {code: 'DEV', name: 'Devon'},
-    {code: 'DOR', name: 'Dorset'},
-    {code: 'ESS', name: 'Essex'},
-    {code: 'GLO', name: 'Gloucestershire'},
-    {code: 'HAM', name: 'Hampshire'},
-    {code: 'HER', name: 'Hertfordshire'},
-    {code: 'HUN', name: 'Huntingdonshire'},
-    {code: 'KEN', name: 'Kent'},
-    {code: 'LAN', name: 'Lancashire'},
-    {code: 'LEI', name: 'Leicestershire'},
-    {code: 'LIN', name: 'Lincolnshire'},
-    {code: 'MID', name: 'Middlesex'},
-    {code: 'NOR', name: 'Norfolk'},
-    {code: 'NOA', name: 'Northamptonshire'},
-    {code: 'NOH', name: 'Northumberland'},
-    {code: 'NOT', name: 'Nottinghamshire'},
-    {code: 'OXF', name: 'Oxfordshire'},
-    {code: 'SOM', name: 'Somerset'},
-    {code: 'STA', name: 'Staffordshire'},
-    {code: 'SUF', name: 'Suffolk'},
-    {code: 'SUR', name: 'Surrey'},
-    {code: 'SUS', name: 'Sussex'},
-    {code: 'WAR', name: 'Warwickshire'},
-    {code: 'WIL', name: 'Wiltshire'},
-    {code: 'WOR', name: 'Worcestershire'},
-    {code: 'YOR', name: 'Yorkshire'}
-  ];
+  // counties = [
+  //   {code: 'BED', name: 'Bedfordshire'},
+  //   {code: 'BER', name: 'Berkshire'},
+  //   {code: 'BRI', name: 'Bristol'},
+  //   {code: 'BUC', name: 'Buckinghamshire'},
+  //   {code: 'CAM', name: 'Cambridgeshire'},
+  //   {code: 'CHE', name: 'Cheshire'},
+  //   {code: 'COR', name: 'Cornwall'},
+  //   {code: 'COU', name: 'County Durham'},
+  //   {code: 'DER', name: 'Derbyshire'},
+  //   {code: 'DEV', name: 'Devon'},
+  //   {code: 'DOR', name: 'Dorset'},
+  //   {code: 'ESS', name: 'Essex'},
+  //   {code: 'GLO', name: 'Gloucestershire'},
+  //   {code: 'HAM', name: 'Hampshire'},
+  //   {code: 'HER', name: 'Hertfordshire'},
+  //   {code: 'HUN', name: 'Huntingdonshire'},
+  //   {code: 'KEN', name: 'Kent'},
+  //   {code: 'LAN', name: 'Lancashire'},
+  //   {code: 'LEI', name: 'Leicestershire'},
+  //   {code: 'LIN', name: 'Lincolnshire'},
+  //   {code: 'MID', name: 'Middlesex'},
+  //   {code: 'NOR', name: 'Norfolk'},
+  //   {code: 'NOA', name: 'Northamptonshire'},
+  //   {code: 'NOH', name: 'Northumberland'},
+  //   {code: 'NOT', name: 'Nottinghamshire'},
+  //   {code: 'OXF', name: 'Oxfordshire'},
+  //   {code: 'SOM', name: 'Somerset'},
+  //   {code: 'STA', name: 'Staffordshire'},
+  //   {code: 'SUF', name: 'Suffolk'},
+  //   {code: 'SUR', name: 'Surrey'},
+  //   {code: 'SUS', name: 'Sussex'},
+  //   {code: 'WAR', name: 'Warwickshire'},
+  //   {code: 'WIL', name: 'Wiltshire'},
+  //   {code: 'WOR', name: 'Worcestershire'},
+  //   {code: 'YOR', name: 'Yorkshire'}
+  // ];
 
   regexEmail = '^(([^<>()\\[\\]\\\\.,;:\\s@"]+(\\.[^<>()\\[\\]\\\\.,;:\\s@"]+)*)|(".+"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$';
 

@@ -190,11 +190,11 @@
               class="help-block animated fadeIn"
               *ngIf="
               (signupForm.get('availability.end').touched || signupForm.get('availability.end').dirty) &&
-              (signupForm.get('availability.end').errors || signupForm.get('availability').errors?.required)">
+              (signupForm.get('availability.end').errors || signupForm.get('availability').errors.required)">
               <span *ngIf="signupForm.get('availability.end').errors.required">
                   Please enter the end date.
               </span>
-              <span *ngIf="signupForm.get('availability').errors?.match">
+              <span *ngIf="signupForm.get('availability').errors.match">
                   The end date cannot be set prior to the start date.
                 </span>
             </div>
