@@ -19,7 +19,7 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "styles.css"
+        "sass/styles.scss"
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",
@@ -29,12 +29,14 @@
       }
     },
     {
+      "name": "app.routing",
       "root": "src",
       "outDir": "dist-server",
       "assets": [
         "assets",
         "favicon.ico"
       ],
+      "platform": "server",
       "index": "index.html",
       "main": "main.server.ts",
       "test": "test.ts",
@@ -49,9 +51,7 @@
       "environments": {
         "dev": "environments/environment.ts",
         "prod": "environments/environment.prod.ts"
-      },
-      "platform": "server",
-      "name": "app.routing"
+      }
     }
   ],
   "e2e": {
@@ -79,7 +79,8 @@
     }
   },
   "defaults": {
-    "styleExt": "css",
-    "component": {}
+    "styleExt": "scss",
+    "component": {
+    }
   }
 }

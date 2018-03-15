@@ -1,11 +1,12 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {MaterialModule} from './shared/material/material.module';
 import {routing} from './app.routing';
 
 
-import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
-import { HomeComponent } from './home/home.component';
+import {AppComponent} from './app.component';
+import {LoginComponent} from './login/login.component';
+import {HomeComponent} from './home/home.component';
 
 
 @NgModule({
@@ -15,10 +16,15 @@ import { HomeComponent } from './home/home.component';
     HomeComponent
   ],
   imports: [
-    BrowserModule.withServerTransition({ appId: 'serverApp' }),
-    routing
+    BrowserModule.withServerTransition({appId: 'serverApp'}),
+    routing,
+    MaterialModule
+  ],
+  exports: [
+    MaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
