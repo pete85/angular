@@ -99,7 +99,7 @@ export class SignupFormReactiveComponent implements OnInit {
 
   ngOnInit() {
 
-    document.getElementById('phoneRequired').innerHTML = '';
+    document.getElementById('phoneRequired').innerHTML = '*';
     this.setValuesInit();
 
     // this.signupForm = new FormGroup({
@@ -140,8 +140,8 @@ export class SignupFormReactiveComponent implements OnInit {
         start: ['', Validators.required],
         end: ['', Validators.required]
       }, {validator: dateCompare}),
-      notification: 'email',
-      phone: ['', Validators.pattern(this.regexPhone)],
+      notification: 'text',
+      phone: ['', [Validators.required, Validators.pattern(this.regexPhone)]],
       rating: ['', ratingRange(1, 5)],
       sendCatalog: true
     });
